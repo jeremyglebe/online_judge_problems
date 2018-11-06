@@ -11,7 +11,7 @@ int main(){
 	while( sum != -1 ){
 		
 		k = 0;
-		for(int i = 1; i <= sum; i++){
+		for(long long i = 1; i <= sum; i++){
 			
 			int temp_k = ceil( ( ( ( ( -2 ) * i ) + 1 ) + sqrt( pow( ( 2 * i ) - 1, 2 ) - ( 4 * (-2) * sum ) ) ) / 2 );
 			int temp_n1 = i;
@@ -27,6 +27,7 @@ int main(){
 			
 		}
 		
+		cout << "Sum: " << sum << " K: " << k << endl;
 		cout << sum << " = " << n1 << " + ... + " << n2 << '\n';
 		
 		cin >> sum;
