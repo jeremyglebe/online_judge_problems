@@ -58,16 +58,12 @@ int main()
             bool *visited = new bool[num_cells + 1];
             // Tracks the shortest distance to each cell
             int *d_values = new int[num_cells + 1];
-            // Tracks the previous cell for each cell's shortest path
-            int *p_values = new int[num_cells + 1];
             // Initialize values in each array
             for (int i = 1; i <= num_cells; i++)
             {
                 visited[i] = false;
                 // INT_MAX represents infinity
                 d_values[i] = INT_MAX;
-                // INT_MAX represents no previous item (not connected or start node)
-                p_values[i] = INT_MAX;
             }
             // 0 distance from mouse to mouse
             d_values[mouse] = 0;
@@ -96,7 +92,6 @@ int main()
                             if (d_values[this_node] + matrix[this_node][id] < d_values[id])
                             {
                                 d_values[id] = d_values[this_node] + matrix[this_node][id];
-                                p_values[id] = this_node;
                             }
                             // Check if we should visit that neighbor
                             if (!visited[id])
@@ -112,12 +107,10 @@ int main()
                 to_visit.pop();
             }
             /*END OF DIJKSTRA'S ALGORITHM IMPLEMENTATION*/
+
+            // If the mouse can make it in time, increment the counter
             if (d_values[exit_id] >= 0 && d_values[exit_id] <= max_time)
                 num_lucky_mice++;
-            // else
-            // {
-            //     cout << "Mouse: " << mouse << ", Distance: " << d_values[exit_id] << '\n';
-            // }
         }
 
         // Create a blank line if this isn't the first case
@@ -125,14 +118,7 @@ int main()
         {
             cout << '\n';
         }
-        // Print the graph matrix
-        // for (int cell = 1; cell <= num_cells; cell++)
-        // {
-        //     cout << "Cell: " << cell << ", Visited: " << visited[cell]
-        //          << ", Distance: " << d_values[cell] << ", Prev: "
-        //          << p_values[cell] << '\n';
-        // }
-        // Print the results
+        // Output the number of mice that can make it in time
         cout << num_lucky_mice << '\n';
     }
 }
